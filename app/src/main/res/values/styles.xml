@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="FrameworkRoot.Theme" parent="android:Theme.Holo.Light.DarkActionBar" />
+    <style name="FrameworkRoot.ActionBar" parent="android:Widget.Holo.ActionBar" />
+    <style name="FrameworkRoot.ActionBar.TitleText" parent="android:TextAppearance.Holo.Widget.ActionBar.Title" />
+    <style name="FrameworkRoot.ActionBar.TabBar" parent="android:Widget.Holo.ActionBar.TabBar" />
+    <style name="FrameworkRoot.EditText" parent="android:Widget.Holo.Light.EditText" />
+    <style name="FrameworkRoot.Widget" parent="android:Theme.Holo" />
+    <style name="FrameworkRoot.Widget.ActionButton.Overflow" parent="android:Widget.Holo.ActionButton.Overflow" />
+    <style name="FrameworkRoot.Widget.Spinner" parent="android:Widget.Holo.Light.Spinner" />
+    <style name="FrameworkRoot.Widget.ListView.DropDown" parent="android:Widget.Holo.Light.ListView.DropDown" />
+    <style name="FrameworkRoot.Widget.PopupMenu" parent="android:Widget.Holo.Light.PopupMenu" />
+    <style name="FrameworkRoot.TextAppearance.Widget.PopupMenu.Large" parent="android:TextAppearance.Holo.Widget.PopupMenu.Large" />
+
+
+    <style name="AppTheme" parent="FrameworkRoot.Theme">
+        <item name="android:windowBackground">@android:color/holo_green_light</item>
+    </style>
+
+    <!-- Action bar -->
+    <style name="ActionBar.Base" parent="FrameworkRoot.ActionBar">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="android:icon">@drawable/ic_launcher</item>
+        <item name="android:displayOptions">showHome|showTitle</item>
+        <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
+        <item name="android:logo">@drawable/ic_launcher</item>
+    </style>
+
+    <style name="ActionBar" parent="ActionBar.Base" />
+
+    <style name="ActionBar.TitleText" parent="FrameworkRoot.ActionBar.TitleText">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TabIndicator" />
+
+    <style name="ElevatedActionBar" />
+
+    <style name="ActionBarThemeOverlay" />
+
+    <style name="HeaderBar" />
+
+    <style name="add_button_style">
+        <item name="android:layout_width">@dimen/add_button_width</item>
+        <item name="android:layout_height">@dimen/add_button_height</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/add_bg</item>
+        <item name="android:contentDescription">@string/add</item>
+    </style>
+</resources>
+
