@@ -12,7 +12,33 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false"></FrameLayout>
+        android:clipChildren="false">
+
+        <com.vashisthg.androidl.widget.MultiSwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Sessions fragment showing the session grid -->
+            <fragment android:name="com.vashisthg.androidl.TestFragment"
+                      android:id="@+id/sessions_fragment"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      tools:layout="@layout/fragment_test" />
+        </com.vashisthg.androidl.widget.MultiSwipeRefreshLayout>
+
+        <LinearLayout style="@style/HeaderBar"
+                      android:id="@+id/headerbar"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:clickable="true"
+                      android:orientation="vertical">
+
+            <include layout="@layout/toolbar_actionbar" /> <!-- placeholder, empty except on L -->
+
+
+        </LinearLayout>
+        </FrameLayout>
 
 
     <!-- Nav drawer -->
