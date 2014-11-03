@@ -39,6 +39,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
     private static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 0;
+    private static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 1;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
 
@@ -233,6 +234,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         mNavDrawerItems.clear();
 
+        mNavDrawerItems.add(NAVDRAWER_ITEM_MAIN_ACTIVITY);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
 
         createNavDrawerItems();
@@ -306,6 +308,11 @@ public abstract class BaseActivity extends ActionBarActivity {
             switch (itemId) {
                 case NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS:
                     intent = new Intent(this, TransitionsActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case NAVDRAWER_ITEM_MAIN_ACTIVITY:
+                    intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     break;
