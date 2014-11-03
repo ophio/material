@@ -4,9 +4,11 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +20,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.vashisthg.androidl.utils.LUtils;
 import com.vashisthg.androidl.utils.PrefUtils;
@@ -34,6 +38,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
+    private static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 0;
+    private static final long NAVDRAWER_LAUNCH_DELAY = 250;
+    private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -63,14 +70,19 @@ public abstract class BaseActivity extends ActionBarActivity {
     // when you scroll down a list, and reappear quickly when you scroll up).
     private ArrayList<View> mHideableHeaderViews = new ArrayList<View>();
 
+    private ArrayList<Integer> mNavDrawerItems = new ArrayList<Integer>();
+
     private static final TypeEvaluator ARGB_EVALUATOR = new ArgbEvaluator();
 
     // SwipeRefreshLayout allows the user to swipe the screen down to trigger a manual refresh
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ViewGroup mDrawerItemsListContainer;
+    private View[] mNavDrawerItemViews;
+    private Handler mHandler = new Handler();
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         mLUtils = LUtils.getInstance(this);
         mThemedStatusBarColor = getResources().getColor(R.color.theme_primary_dark);
@@ -219,8 +231,100 @@ public abstract class BaseActivity extends ActionBarActivity {
     /** Populates the navigation drawer with the appropriate items. */
     private void populateNavDrawer() {
 
+        mNavDrawerItems.clear();
+
+        mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
+
+        createNavDrawerItems();
+
+    }
+    private void createNavDrawerItems() {
+        mDrawerItemsListContainer = (ViewGroup) findViewById(R.id.navdrawer_items_list);
+        if (mDrawerItemsListContainer == null) {
+            return;
+        }
+
+        mNavDrawerItemViews = new View[mNavDrawerItems.size()];
+        mDrawerItemsListContainer.removeAllViews();
+        int i = 0;
+        for (int itemId : mNavDrawerItems) {
+            mNavDrawerItemViews[i] = makeNavDrawerItem(itemId, mDrawerItemsListContainer);
+            mDrawerItemsListContainer.addView(mNavDrawerItemViews[i]);
+            ++i;
+        }
     }
 
+    private View makeNavDrawerItem(final int itemId, ViewGroup container) {
+        boolean selected = getSelfNavDrawerItem() == itemId;
+        int layoutToInflate = R.layout.navdrawer_item;
+        View view = getLayoutInflater().inflate(layoutToInflate, container, false);
+
+        ImageView iconView = (ImageView) view.findViewById(R.id.icon);
+        TextView titleView = (TextView) view.findViewById(R.id.title);
+        int iconId = R.drawable.ic_launcher;
+        int titleId = R.string.activity_transitions_title;
+        iconView.setVisibility(View.VISIBLE);
+        iconView.setImageResource(iconId);
+        titleView.setText(getString(titleId));
+        formatNavDrawerItem(view, itemId, selected);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNavDrawerItemClicked(itemId);
+            }
+        });
+        return view;
+    }
+
+    private void onNavDrawerItemClicked(final int itemId) {
+        if (itemId == getSelfNavDrawerItem()) {
+            mDrawerLayout.closeDrawer(Gravity.START);
+            return;
+        }
+
+            // launch the target Activity after a short delay, to allow the close animation to play
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    goToNavDrawerItem(itemId);
+                }
+            }, NAVDRAWER_LAUNCH_DELAY);
+
+            // change the active item on the list so the user can see the item changed
+            setSelectedNavDrawerItem(itemId);
+            // fade out the main content
+            View mainContent = findViewById(R.id.main_content);
+            if (mainContent != null) {
+                mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
+            }
+
+        mDrawerLayout.closeDrawer(Gravity.START);
+    }
+
+    private void goToNavDrawerItem(int itemId) {
+            Intent intent;
+            switch (itemId) {
+                case NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS:
+                    intent = new Intent(this, TransitionsActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+            }
+    }
+
+    private void formatNavDrawerItem(View view, int itemId, boolean selected) {
+
+        ImageView iconView = (ImageView) view.findViewById(R.id.icon);
+        TextView titleView = (TextView) view.findViewById(R.id.title);
+
+        // configure its appearance according to whether or not it's selected
+        titleView.setTextColor(selected ?
+                getResources().getColor(R.color.navdrawer_text_color_selected) :
+                getResources().getColor(R.color.navdrawer_text_color));
+        iconView.setColorFilter(selected ?
+                getResources().getColor(R.color.navdrawer_icon_tint_selected) :
+                getResources().getColor(R.color.navdrawer_icon_tint));
+    }
     protected void autoShowOrHideActionBar(boolean show) {
         if (show == mActionBarShown) {
             return;
@@ -229,6 +333,21 @@ public abstract class BaseActivity extends ActionBarActivity {
         mActionBarShown = show;
         onActionBarAutoShowOrHide(show);
     }
+    /**
+     * Sets up the given navdrawer item's appearance to the selected state. Note: this could
+     * also be accomplished (perhaps more cleanly) with state-based layouts.
+     */
+    private void setSelectedNavDrawerItem(int itemId) {
+        if (mNavDrawerItemViews != null) {
+            for (int i = 0; i < mNavDrawerItemViews.length; i++) {
+                if (i < mNavDrawerItems.size()) {
+                    int thisItemId = mNavDrawerItems.get(i);
+                    formatNavDrawerItem(mNavDrawerItemViews[i], thisItemId, itemId == thisItemId);
+                }
+            }
+        }
+    }
+
 
     protected void onActionBarAutoShowOrHide(boolean shown) {
         if (mStatusBarColorAnimator != null) {

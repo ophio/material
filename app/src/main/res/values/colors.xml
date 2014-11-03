@@ -41,6 +41,10 @@
 
     <color name="translucent_actionbar_background">#cc3f51b5</color>
     <color name="translucent_statusbar_background">#cc3f51b5</color>
+    <color name="navdrawer_text_color">#de000000</color>
+    <color name="navdrawer_text_color_selected">@color/theme_primary</color>
+    <color name="navdrawer_icon_tint_selected">@color/theme_primary</color>
+    <color name="navdrawer_icon_tint">#888</color>
 
 
 </resources>

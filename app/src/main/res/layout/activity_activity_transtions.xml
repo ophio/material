@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:transitionName="@string/transition_main_activity"
+        android:src="@drawable/image1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_transitions_image_view1"/>
+    <ImageView
+        android:src="@android:drawable/sym_action_call"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_transitions_image_view_height"
+        />
+    <ImageView
+        android:src="@android:drawable/sym_action_call"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_transitions_image_view_height"
+        />
+    <ImageView
+        android:src="@android:drawable/sym_action_call"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_transitions_image_view_height"
+        />
+</LinearLayout>

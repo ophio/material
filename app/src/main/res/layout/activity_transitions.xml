@@ -20,11 +20,11 @@
             android:layout_height="match_parent">
 
             <!-- Sessions fragment showing the session grid -->
-            <fragment android:name="com.vashisthg.androidl.DemoFragment"
-                      android:id="@+id/sessions_fragment"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      tools:layout="@layout/fragment_demo" />
+            <fragment android:name="com.vashisthg.androidl.TestFragment"
+                android:id="@+id/sessions_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_test" />
         </com.vashisthg.androidl.widget.MultiSwipeRefreshLayout>
 
         <LinearLayout style="@style/HeaderBar"

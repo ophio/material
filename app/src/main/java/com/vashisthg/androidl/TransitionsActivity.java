@@ -7,10 +7,10 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class TransitionsActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.activity_transitions_image_view1).setOnClickListener(this);
