@@ -38,7 +38,7 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_NOT_INVALID;
+        return NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS;
     }
 
     @Override

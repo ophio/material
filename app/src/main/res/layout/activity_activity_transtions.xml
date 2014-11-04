@@ -14,18 +14,9 @@
 
 
     </LinearLayout>
-    <TextView
-        android:layout_width="fill_parent"
-        android:gravity="center"
-        android:transitionName="@string/textViewTransitionName"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/headerbar"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_body_1_material"
-        android:id="@+id/textView"
-        android:text="@string/imageViewTitle1"/>
+
     <ImageView
-        android:layout_below="@id/textView"
+        android:layout_below="@id/headerbar"
         android:src="@drawable/image1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -44,9 +35,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_transitions_image_view_height"
         />
+    <TextView
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:transitionName="@string/textViewTransitionName"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView3"
+        android:textStyle="bold"
+        android:textSize="@dimen/activity_transition_text_size"
+        android:id="@+id/textView"
+        android:text="@string/imageViewTitle1"/>
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_below="@id/imageView3"
+        android:layout_below="@id/textView"
         android:src="@android:drawable/sym_action_call"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_transitions_image_view_height"

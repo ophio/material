@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_NOT_INVALID;
+        return NAVDRAWER_ITEM_MAIN_ACTIVITY;
     }
 
 }

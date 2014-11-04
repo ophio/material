@@ -38,7 +38,7 @@
                 android:textStyle="bold"
                 android:text="@string/imageViewTitle1"/>
             <ImageView
-                android:paddingTop="@dimen/keyline_1"
+                android:layout_marginTop="@dimen/keyline_1"
                 android:transitionName="@string/transition_main_activity"
                 android:src="@drawable/image1"
                 android:layout_width="wrap_content"

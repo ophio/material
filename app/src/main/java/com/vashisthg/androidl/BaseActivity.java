@@ -38,11 +38,11 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
-    private static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 0;
-    private static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 1;
+    protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 0;
+    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 1;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions};
+    private static final int[] NAV_DRAWER_TITLES = {R.string.activity_transitions, R.string.main_activity};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;

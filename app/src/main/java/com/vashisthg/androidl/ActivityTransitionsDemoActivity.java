@@ -52,7 +52,7 @@ public class ActivityTransitionsDemoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mLUtils.hasL())
-            finishAfterTransition();
+//        if(mLUtils.hasL())
+//            finishAfterTransition();
     }
 }
