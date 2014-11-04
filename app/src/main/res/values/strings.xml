@@ -4,5 +4,14 @@
     <string name="app_name">Material-Demo</string>
     <string name="sample_text1">Sample Text 1</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="transition_main_activity">activityTransitionsImageView</string>
+    <string name="font_fontFamily_medium">sans-serif</string>
+    <string name="placeholder_lorem_ipsum">This is some random text that I am writing just to populate some data into the view.</string>
+    <string name="activity_transitions_title">Activity Transitions</string>
+    <string name="imageViewTitle1">Image View 1 :</string>
+    <string name="imageViewTitle2">Image View 2 :</string>
+    <string name="textViewTransitionName">textViewTransition</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="activity_transitions">Activity Transitions</string>
+    <integer name="font_textStyle_medium">1</integer> <!-- bold -->
 </resources>

@@ -24,15 +24,13 @@
     android:background="@color/navdrawer_background"
     android:fitsSystemWindows="true">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/navdrawer_items_list"
-                  android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="?attr/listPreferredItemHeight"
-            android:textColor="@color/body_text_1"
-            android:text="@string/sample_text1"/>
+    <LinearLayout
+        android:paddingTop="@dimen/keyline_2_minus_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navdrawer_items_list"
+        android:orientation="vertical">
+
 
     </LinearLayout>
 

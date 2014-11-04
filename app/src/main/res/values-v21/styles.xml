@@ -12,6 +12,15 @@
         <item name="android:statusBarColor">?colorPrimaryDark</item>
 
         <item name="android:alertDialogTheme">@style/Theme.MyApp.AlertDialog</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <!--&lt;!&ndash; specify shared element transitions &ndash;&gt;-->
+        <!--<item name="android:windowSharedElementEnterTransition">-->
+            <!--@transition/change_image_transform</item>-->
+        <!--<item name="android:windowSharedElementExitTransition">-->
+            <!--@transition/change_image_transform</item>-->
     </style>
 
 
