@@ -41,6 +41,8 @@
         <item name="android:listPopupWindowStyle">@style/Widget.MyApp.PopupMenu</item>
         <item name="android:dropDownListViewStyle">@style/Widget.MyApp.ListView.DropDown</item>
         <item name="android:textAppearanceLargePopupMenu">@style/TextAppearance.LargePopupMenu</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
 
         <item name="searchViewStyle">@style/Widget.MyApp.SearchView</item>
     </style>

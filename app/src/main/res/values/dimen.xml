@@ -18,4 +18,7 @@
     <dimen name="swipe_refresh_progress_bar_start_margin">-40dp</dimen>
     <dimen name="swipe_refresh_progress_bar_end_margin">16dp</dimen>
 
+    <dimen name="demo_item_height">280dp</dimen>
+    <dimen name="demo_item_text_container_height">56dp</dimen>
+
 </resources>

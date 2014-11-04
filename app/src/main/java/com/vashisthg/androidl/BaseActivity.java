@@ -25,9 +25,7 @@ import com.vashisthg.androidl.widget.ScrimInsetsScrollView;
 
 import java.util.ArrayList;
 
-/**
- * Created by gvv-fueled on 28/10/14.
- */
+
 public abstract class BaseActivity extends ActionBarActivity {
 
     private static final String LOGTAG = BaseActivity.class.getSimpleName();
