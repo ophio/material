@@ -72,7 +72,8 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
             case 2:
                 return
                 ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                        Pair.create(view, transitionName), Pair.create(findViewById(R.id.text_view_2), getString(R.string.textViewTransitionName)));
+                        Pair.create(view, transitionName),
+                        Pair.create(findViewById(R.id.text_view_2), getString(R.string.textViewTransitionName)));
         }
         return null;
     }

@@ -39,7 +39,6 @@
                 android:text="@string/imageViewTitle1"/>
             <ImageView
                 android:layout_marginTop="@dimen/keyline_1"
-                android:transitionName="@string/transition_main_activity"
                 android:src="@drawable/image1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_transitions_home_image1_height"
@@ -54,7 +53,6 @@
                 android:text="@string/imageViewTitle2"/>
             <ImageView
                 android:layout_marginTop="@dimen/keyline_1"
-                android:transitionName="@string/transition_main_activity2"
                 android:src="@drawable/image2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
