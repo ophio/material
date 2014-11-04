@@ -1,12 +1,13 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.vashisthg.androidl.ApplicationFacade;
+import com.vashisthg.androidl.R;
 
 /**
  * Created by gaj-fueled on 03/11/14.

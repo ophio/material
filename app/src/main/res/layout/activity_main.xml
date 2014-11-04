@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <!-- Sessions fragment showing the session grid -->
-            <fragment android:name="com.vashisthg.androidl.DemoFragment"
+            <fragment android:name="com.vashisthg.androidl.view.fragment.DemoFragment"
                       android:id="@+id/sessions_fragment"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"

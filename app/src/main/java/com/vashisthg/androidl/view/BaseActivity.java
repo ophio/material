@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +22,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.vashisthg.androidl.R;
 import com.vashisthg.androidl.utils.LUtils;
 import com.vashisthg.androidl.utils.PrefUtils;
 import com.vashisthg.androidl.widget.ScrimInsetsScrollView;
@@ -38,11 +38,12 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
-    protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 0;
-    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 1;
+    protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
+    protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
+    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.activity_transitions, R.string.main_activity};
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -237,6 +238,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         mNavDrawerItems.add(NAVDRAWER_ITEM_MAIN_ACTIVITY);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
 
         createNavDrawerItems();
 
@@ -315,6 +317,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                     break;
                 case NAVDRAWER_ITEM_MAIN_ACTIVITY:
                     intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case NAVDRAWER_ITEM_REVEAL_DEMO:
+                    intent = new Intent(this, RevealDemoActivity.class);
                     startActivity(intent);
                     finish();
                     break;

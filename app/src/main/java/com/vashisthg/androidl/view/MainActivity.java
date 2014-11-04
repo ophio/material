@@ -1,10 +1,8 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.view.View;
+
+import com.vashisthg.androidl.R;
 
 
 public class MainActivity extends BaseActivity {
