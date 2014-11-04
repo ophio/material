@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_transitions_image_view_height">100dp</dimen>
-    <dimen name="activity_transitions_home_image1_height">50dp</dimen>
+    <dimen name="activity_transitions_home_image1_height">70dp</dimen>
 </resources>

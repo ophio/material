@@ -38,13 +38,6 @@
 
 
         </LinearLayout>
-        <ImageView
-            android:layout_marginTop="?android:attr/actionBarSize"
-            android:transitionName="@string/transition_main_activity"
-            android:src="@drawable/image1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_transitions_home_image1_height"
-            android:id="@+id/activity_transitions_image_view1"/>
     </FrameLayout>
 
 

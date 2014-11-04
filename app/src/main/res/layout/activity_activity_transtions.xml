@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout style="@style/HeaderBar"
+        android:id="@+id/headerbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical">
 
+        <include layout="@layout/toolbar_actionbar" /> <!-- placeholder, empty except on L -->
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:transitionName="@string/textViewTransitionName"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerbar"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_text_size_body_1_material"
+        android:id="@+id/textView"
+        android:text="@string/imageViewTitle1"/>
     <ImageView
-        android:transitionName="@string/transition_main_activity"
+        android:layout_below="@id/textView"
         android:src="@drawable/image1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_transitions_image_view1"/>
+        android:id="@+id/activity_transitions_image_view"/>
     <ImageView
+        android:id="@+id/imageView2"
+        android:layout_below="@id/activity_transitions_image_view"
         android:src="@android:drawable/sym_action_call"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_transitions_image_view_height"
         />
     <ImageView
+        android:id="@+id/imageView3"
+        android:layout_below="@id/imageView2"
         android:src="@android:drawable/sym_action_call"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_transitions_image_view_height"
         />
     <ImageView
+        android:id="@+id/imageView4"
+        android:layout_below="@id/imageView3"
         android:src="@android:drawable/sym_action_call"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_transitions_image_view_height"
         />
-</LinearLayout>
+</RelativeLayout>

@@ -8,24 +8,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false">
-
-        <com.vashisthg.androidl.widget.MultiSwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- Sessions fragment showing the session grid -->
-            <fragment android:name="com.vashisthg.androidl.TestFragment"
-                android:id="@+id/sessions_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_test" />
-        </com.vashisthg.androidl.widget.MultiSwipeRefreshLayout>
 
         <LinearLayout style="@style/HeaderBar"
             android:id="@+id/headerbar"
@@ -38,15 +25,43 @@
 
 
         </LinearLayout>
-        <ImageView
-            android:layout_marginTop="?android:attr/actionBarSize"
-            android:transitionName="@string/transition_main_activity"
-            android:src="@drawable/image1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_transitions_home_image1_height"
-            android:id="@+id/activity_transitions_image_view1"/>
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:id="@+id/text_view_1"
+                android:layout_width="fill_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/imageViewTitle1"/>
+            <ImageView
+                android:paddingTop="@dimen/keyline_1"
+                android:transitionName="@string/transition_main_activity"
+                android:src="@drawable/image1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/activity_transitions_home_image1_height"
+                android:id="@+id/activity_transitions_image_view1"/>
+            <TextView
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:id="@+id/text_view_2"
+                android:layout_width="fill_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="@string/imageViewTitle2"/>
+            <ImageView
+                android:layout_marginTop="@dimen/keyline_1"
+                android:transitionName="@string/transition_main_activity2"
+                android:src="@drawable/image2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_transitions_image_view2"/>
+        </LinearLayout>
 
+    </RelativeLayout>
 
     <!-- Nav drawer -->
     <include layout="@layout/navdrawer" />

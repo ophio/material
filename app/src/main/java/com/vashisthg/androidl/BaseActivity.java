@@ -42,12 +42,13 @@ public abstract class BaseActivity extends ActionBarActivity {
     private static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 1;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
 
     // Helper methods for L APIs
-    private LUtils mLUtils;
+    protected LUtils mLUtils;
 
     // A Runnable that we should execute when the navigation drawer finishes its closing animation
     private Runnable mDeferredOnDrawerClosedRunnable;
@@ -267,7 +268,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         int titleId = R.string.activity_transitions_title;
         iconView.setVisibility(View.VISIBLE);
         iconView.setImageResource(iconId);
-        titleView.setText(getString(titleId));
+        titleView.setText(NAV_DRAWER_TITLES[itemId]);
         formatNavDrawerItem(view, itemId, selected);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,6 +278,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         });
         return view;
     }
+
 
     private void onNavDrawerItemClicked(final int itemId) {
         if (itemId == getSelfNavDrawerItem()) {
