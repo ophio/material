@@ -79,11 +79,13 @@ public class DemoFragment extends Fragment implements  android.support.v7.view.A
 
         List<DemoEntity> demoEntities = new ArrayList<DemoEntity>();
 
+
         DemoEntity demoEntity1 = new DemoEntity(R.drawable.image_one, "one");
         DemoEntity demoEntity2 = new DemoEntity(R.drawable.image_two, "two");
         DemoEntity demoEntity3 = new DemoEntity(R.drawable.image_three, "three");
         DemoEntity demoEntity4 = new DemoEntity(R.drawable.image_four, "four");
         DemoEntity demoEntity5 = new DemoEntity(R.drawable.image_five, "five");
+
 
         demoEntities.add(demoEntity1);
         demoEntities.add(demoEntity2);

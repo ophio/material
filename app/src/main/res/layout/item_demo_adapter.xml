@@ -8,9 +8,9 @@
         android:id="@+id/item_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/demo_item_height"
-        android:scaleType="fitXY"
-        android:src="@drawable/image_one"/>
+        android:scaleType="fitXY"/>
     <LinearLayout
+        android:id="@+id/item_text_wrapper"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:padding="@dimen/keyline_1"

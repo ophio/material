@@ -1,11 +1,18 @@
 package com.vashisthg.androidl;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +32,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.ViewHolder> {
         // each data item is just a string in this case
         @InjectView(R.id.item_text) TextView textView;
         @InjectView(R.id.item_image) ImageView imageView;
+        @InjectView(R.id.item_text_wrapper) ViewGroup itemTextWrapper;
 
         public ViewHolder(View v) {
             super(v);
@@ -55,13 +63,40 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         DemoEntity demoEntity = demoList.get(position);
         holder.textView.setText(demoEntity.text);
-        holder.imageView.setImageResource(demoEntity.imageDrawable);
+        loadImage(holder, demoEntity);
+    }
 
+    private void loadImage(final ViewHolder holder, DemoEntity demoEntity) {
+        /**
+         * Loading the image with picasso and using the pallete library to color the textwrapper
+         */
+        final PalleteTransformation transformation =  PalleteTransformation.instance();
+        Picasso.with(holder.imageView.getContext())
+                .load(demoEntity.imageDrawable)
+                .fit()
+                .transform(transformation)
+                .into(holder.imageView, new Callback.EmptyCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Palette palette = PalleteTransformation.getPalette(((BitmapDrawable) holder.imageView.getDrawable()).getBitmap());
+                        if (palette != null) {
+                            int backgroundcolor = palette.getVibrantColor(R.color.theme_primary_light_translucent);
+
+                            ColorDrawable colorDrawable = new ColorDrawable(backgroundcolor);
+                            colorDrawable.setAlpha(200);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                holder.itemTextWrapper.setBackground(colorDrawable);
+                            } else {
+                                holder.itemTextWrapper.setBackgroundDrawable(colorDrawable);
+                            }
+                        }
+                    }
+                });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:clipChildren="false">
 
-        <com.vashisthg.androidl.widget.MultiSwipeRefreshLayout
+        <FrameLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -25,7 +25,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       tools:layout="@layout/fragment_demo" />
-        </com.vashisthg.androidl.widget.MultiSwipeRefreshLayout>
+        </FrameLayout>
 
         <LinearLayout style="@style/HeaderBar"
             android:id="@+id/headerbar"
