@@ -3,4 +3,5 @@
     <dimen name="activity_transitions_image_view_height">100dp</dimen>
     <dimen name="activity_transitions_home_image1_height">70dp</dimen>
     <dimen name="activity_transition_text_size">20sp</dimen>
+    <dimen name="reveal_demo_image_margin">150dp</dimen>
 </resources>
