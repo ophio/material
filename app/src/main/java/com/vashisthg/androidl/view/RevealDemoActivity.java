@@ -84,7 +84,7 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
             int cy = (view.getTop() + view.getBottom()) / 2;
 
             // get the initial radius for the clipping circle
-            int initialRadius = view.getWidth()/2;
+            int initialRadius = view.getWidth();
 
             // create the animation (the final radius is zero)
             Animator anim =
