@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.vashisthg.androidl.PalleteTransformation;
 import com.vashisthg.androidl.R;
 import com.vashisthg.androidl.view.DemoEntity;
 
