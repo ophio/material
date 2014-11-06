@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.vashisthg.androidl.R;
+import com.vashisthg.androidl.view.adapter.DemoAdapter;
+import com.vashisthg.androidl.view.DemoEntity;
 
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.widget.TwoWayView;

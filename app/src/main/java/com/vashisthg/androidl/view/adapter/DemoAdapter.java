@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view.adapter;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.vashisthg.androidl.PalleteTransformation;
+import com.vashisthg.androidl.R;
+import com.vashisthg.androidl.view.DemoEntity;
 
 import java.util.ArrayList;
 import java.util.List;

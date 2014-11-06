@@ -13,5 +13,7 @@
     <string name="textViewTransitionName">textViewTransition</string>
     <string name="main_activity">Main Activity</string>
     <string name="activity_transitions">Activity Transitions</string>
+    <string name="reveal_demo">Reveal Demo</string>
+    <string name="reveal_demo_show_hide">ShowHide</string>
     <integer name="font_textStyle_medium">1</integer> <!-- bold -->
 </resources>

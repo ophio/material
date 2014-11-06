@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.vashisthg.androidl.ApplicationFacade;
+import com.vashisthg.androidl.R;
+
 
 public class TransitionsActivity extends BaseActivity implements View.OnClickListener {
 
@@ -18,6 +21,7 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transitions);
         setUpView();
+        overridePendingTransition(0,0);
     }
 
     @TargetApi(21)

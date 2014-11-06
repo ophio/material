@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.vashisthg.androidl.view;
 
 import android.support.annotation.DrawableRes;
 
