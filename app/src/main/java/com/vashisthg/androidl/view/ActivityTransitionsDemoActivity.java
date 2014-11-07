@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.ophio.androidl.ApplicationFacade;
 import com.ophio.androidl.R;
+import com.ophio.androidl.widget.ObservableScrollView;
+import com.ophio.androidl.utils.LUtils;
 import com.ophio.androidl.widget.ObservableScrollView;
 
 /**
@@ -46,8 +49,37 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
         initView();
     }
 
+    @TargetApi(21)
     private void setUpDetailsView() {
         detailsContainer = findViewById(R.id.details_container);
+        if(mLUtils.hasL()) {
+            getWindow().getEnterTransition().addListener(new Transition.TransitionListener() {
+                @Override
+                public void onTransitionStart(Transition transition) {
+                    detailsContainer.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionResume(Transition transition) {
+
+                }
+            });
+        }
     }
 
     private void setUpPhotoView() {
@@ -76,7 +108,7 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                onBackPressed();
             }
         });
         toolbar.setTitle("");
@@ -152,7 +184,7 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
         Log.d(LOG, "mHeaderHeightPixels : " + headerBarHeightPixels);
 
         photoHeightPixels = 0;
-            photoHeightPixels = (int) (photoView.getWidth()  / PHOTO_ASPECT_RATIO);
+        photoHeightPixels = (int) (photoView.getWidth()  / PHOTO_ASPECT_RATIO);
 //            photoHeightPixels = Math.min(photoHeightPixels, scrollView.getHeight() * 2 / 3);
 
         ViewGroup.LayoutParams lp;
@@ -162,12 +194,12 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
             photoViewParent.setLayoutParams(lp);
         }
 
-//        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams)
-//                detailsContainer.getLayoutParams();
-//        if (mlp.topMargin != headerBarHeightPixels + photoHeightPixels) {
-//            mlp.topMargin = headerBarHeightPixels + photoHeightPixels;
-//            detailsContainer.setLayoutParams(mlp);
-//        }
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams)
+                detailsContainer.getLayoutParams();
+        if (mlp.topMargin != headerBarHeightPixels + photoHeightPixels) {
+            mlp.topMargin = headerBarHeightPixels + photoHeightPixels;
+            detailsContainer.setLayoutParams(mlp);
+        }
         onScrollChanged(0, 0); // trigger scroll handling
         scrollView.getViewTreeObserver().removeGlobalOnLayoutListener(mGlobalLayoutListener);
     }
