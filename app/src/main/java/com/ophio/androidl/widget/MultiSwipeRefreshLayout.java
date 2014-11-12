@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vashisthg.androidl.widget;
+package com.ophio.androidl.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
-import com.vashisthg.androidl.R;
+import com.ophio.androidl.R;
 
 
 public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {

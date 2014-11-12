@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.vashisthg.androidl.utils;
+package com.ophio.androidl.utils;
 
 import android.util.Log;
 
-import com.vashisthg.androidl.BuildConfig;
+import com.ophio.androidl.BuildConfig;
 
 
 public class LogUtils {

@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.ophio.androidl;
 
 import android.graphics.Bitmap;
 import android.support.v7.graphics.Palette;

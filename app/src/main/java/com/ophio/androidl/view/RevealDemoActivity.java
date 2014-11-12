@@ -1,9 +1,7 @@
-package com.vashisthg.androidl.view;
+package com.ophio.androidl.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +9,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
 
-import com.vashisthg.androidl.R;
+import com.ophio.androidl.R;
 
 import java.lang.Override;
 

@@ -1,8 +1,8 @@
-package com.vashisthg.androidl.view;
+package com.ophio.androidl.view;
 
 import android.os.Bundle;
 
-import com.vashisthg.androidl.R;
+import com.ophio.androidl.R;
 
 
 public class MainActivity extends BaseActivity {
