@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vashisthg.androidl.utils;
+package com.ophio.androidl.utils;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;

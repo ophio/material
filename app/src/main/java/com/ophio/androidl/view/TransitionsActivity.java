@@ -1,4 +1,4 @@
-package com.vashisthg.androidl.view;
+package com.ophio.androidl.view;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.transition.ChangeTransform;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vashisthg.androidl.ApplicationFacade;
-import com.vashisthg.androidl.R;
+import com.ophio.androidl.ApplicationFacade;
+import com.ophio.androidl.R;
 
 
 public class TransitionsActivity extends BaseActivity implements View.OnClickListener {

@@ -1,4 +1,4 @@
-package com.vashisthg.androidl.view;
+package com.ophio.androidl.view;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -19,8 +19,7 @@ import android.widget.TextView;
 import com.ophio.androidl.ApplicationFacade;
 import com.ophio.androidl.R;
 import com.ophio.androidl.widget.ObservableScrollView;
-import com.ophio.androidl.utils.LUtils;
-import com.ophio.androidl.widget.ObservableScrollView;
+
 
 /**
  * Created by gaj-fueled on 03/11/14.

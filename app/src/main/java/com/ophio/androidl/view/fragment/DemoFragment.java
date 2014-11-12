@@ -1,4 +1,4 @@
-package com.vashisthg.androidl.view.fragment;
+package com.ophio.androidl.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vashisthg.androidl.R;
-import com.vashisthg.androidl.view.adapter.DemoAdapter;
-import com.vashisthg.androidl.view.DemoEntity;
+import com.ophio.androidl.R;
+import com.ophio.androidl.view.adapter.DemoAdapter;
+import com.ophio.androidl.view.DemoEntity;
 
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.widget.TwoWayView;

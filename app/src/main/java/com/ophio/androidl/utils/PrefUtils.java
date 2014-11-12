@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.vashisthg.androidl.utils;
+package com.ophio.androidl.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import static com.vashisthg.androidl.utils.LogUtils.makeLogTag;
+import static com.ophio.androidl.utils.LogUtils.makeLogTag;
 
 /**
  * Utilities and constants related to app preferences.

@@ -1,4 +1,4 @@
-package com.vashisthg.androidl.view;
+package com.ophio.androidl.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -22,10 +22,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vashisthg.androidl.R;
-import com.vashisthg.androidl.utils.LUtils;
-import com.vashisthg.androidl.utils.PrefUtils;
-import com.vashisthg.androidl.widget.ScrimInsetsScrollView;
+import com.ophio.androidl.R;
+import com.ophio.androidl.utils.LUtils;
+import com.ophio.androidl.utils.PrefUtils;
+import com.ophio.androidl.widget.ScrimInsetsScrollView;
 
 import java.util.ArrayList;
 

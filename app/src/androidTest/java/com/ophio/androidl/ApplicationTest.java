@@ -1,4 +1,4 @@
-package com.vashisthg.androidl;
+package com.ophio.androidl;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

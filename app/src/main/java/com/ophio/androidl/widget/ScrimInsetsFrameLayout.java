@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vashisthg.androidl.widget;
+package com.ophio.androidl.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,33 +23,33 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.widget.ScrollView;
+import android.widget.FrameLayout;
 
-import com.vashisthg.androidl.R;
+import com.ophio.androidl.R;
 
 
 /**
  * A layout that draws something in the insets passed to {@link #fitSystemWindows(android.graphics.Rect)}, i.e. the area above UI chrome
  * (status and navigation bars, overlay action bars).
  */
-public class ScrimInsetsScrollView extends ScrollView {
+public class ScrimInsetsFrameLayout extends FrameLayout {
     private Drawable mInsetForeground;
 
     private Rect mInsets;
     private Rect mTempRect = new Rect();
     private OnInsetsCallback mOnInsetsCallback;
 
-    public ScrimInsetsScrollView(Context context) {
+    public ScrimInsetsFrameLayout(Context context) {
         super(context);
         init(context, null, 0);
     }
 
-    public ScrimInsetsScrollView(Context context, AttributeSet attrs) {
+    public ScrimInsetsFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs, 0);
     }
 
-    public ScrimInsetsScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public ScrimInsetsFrameLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs, defStyle);
     }
