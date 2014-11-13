@@ -36,14 +36,17 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_NOT_INVALID = 1;
 
-    // Durations for certain animations we use:
-    private static final int HEADER_HIDE_ANIM_DURATION = 300;
+    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
     protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
     protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
-    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
+    protected static final int NAVDRAWER_ITEM_FLEXIBLE_SPACE_DEMO = 3;
+
+    // Durations for certain animations we use:
+    private static final int HEADER_HIDE_ANIM_DURATION = 300;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo};
+
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.flexible_space};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -239,6 +242,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_MAIN_ACTIVITY);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
         mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_FLEXIBLE_SPACE_DEMO);
 
         createNavDrawerItems();
 
@@ -308,24 +312,26 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     private void goToNavDrawerItem(int itemId) {
-            Intent intent;
             switch (itemId) {
                 case NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS:
-                    intent = new Intent(this, TransitionsActivity.class);
-                    startActivity(intent);
-                    finish();
+                    startActivityOnClick(TransitionsActivity.class);
                     break;
                 case NAVDRAWER_ITEM_MAIN_ACTIVITY:
-                    intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    startActivityOnClick(MainActivity.class);
                     break;
                 case NAVDRAWER_ITEM_REVEAL_DEMO:
-                    intent = new Intent(this, RevealDemoActivity.class);
-                    startActivity(intent);
-                    finish();
+                    startActivityOnClick(RevealDemoActivity.class);
+                    break;
+                case NAVDRAWER_ITEM_FLEXIBLE_SPACE_DEMO:
+                    startActivityOnClick(FlexibleSpaceDemoActivity.class);
                     break;
             }
+    }
+
+    private void startActivityOnClick(Class cls) {
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
+        finish();
     }
 
     private void formatNavDrawerItem(View view, int itemId, boolean selected) {

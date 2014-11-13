@@ -19,5 +19,6 @@
     <string name="placeholder_activity_transition_subtitle">Demo Subtitle</string>
     <string name="description_share">Share</string>
     <string name="title_share">Share</string>
+    <string name="flexible_space">Flexible Space</string>
     <integer name="font_textStyle_medium">1</integer> <!-- bold -->
 </resources>
