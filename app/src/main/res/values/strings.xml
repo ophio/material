@@ -14,10 +14,16 @@
     <string name="main_activity">Main Activity</string>
     <string name="activity_transitions">Activity Transitions</string>
     <string name="reveal_demo">Reveal Demo</string>
+    <string name="fab_demo">FAB Demo</string>
     <string name="reveal_demo_show_hide">ShowHide</string>
     <string name="placeholder_activity_transition_title">Demo Title</string>
     <string name="placeholder_activity_transition_subtitle">Demo Subtitle</string>
     <string name="description_share">Share</string>
     <string name="title_share">Share</string>
+
     <integer name="font_textStyle_medium">1</integer> <!-- bold -->
+    <string name="title_activity_fab">FabActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

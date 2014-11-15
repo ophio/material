@@ -5,8 +5,8 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:theme="@style/Theme.MyApp"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:theme="@style/Theme.MyApp" >
         <activity
             android:name="com.ophio.androidl.view.MainActivity"
             android:label="@string/app_name" >
@@ -16,10 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ophio.androidl.view.ActivityTransitionsDemoActivity"/>
-        <activity android:name="com.ophio.androidl.view.TransitionsActivity"/>
-        <activity android:name="com.ophio.androidl.view.RevealDemoActivity"/>
-
+        <activity android:name="com.ophio.androidl.view.ActivityTransitionsDemoActivity" />
+        <activity android:name="com.ophio.androidl.view.TransitionsActivity" />
+        <activity android:name="com.ophio.androidl.view.RevealDemoActivity" />
+        <activity
+            android:name="com.ophio.androidl.view.FabActivity"
+            android:label="@string/title_activity_fab" >
+        </activity>
     </application>
 
 </manifest>
