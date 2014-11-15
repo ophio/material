@@ -84,4 +84,13 @@
         <item name="android:elevation">@dimen/headerbar_elevation</item>
     </style>
 
+    <style name="add_button_style">
+        <item name="android:layout_width">@dimen/add_button_width</item>
+        <item name="android:layout_height">@dimen/add_button_height</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/add_bg</item>
+        <item name="android:contentDescription">@string/add</item>
+    </style>
+
 </resources>

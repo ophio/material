@@ -47,4 +47,14 @@
     <color name="navdrawer_icon_tint">#888</color>
 
 
+    <dimen name="add_button_height">56dp</dimen>
+    <dimen name="add_button_width">56dp</dimen>
+
+    <dimen name="add_button_height_no_padding">40dp</dimen>
+    <dimen name="add_button_width_no_padding">40dp</dimen>
+
+    <dimen name="add_press_translation_z">2dp</dimen>
+    <color name="accent">#00b0ff</color>
+
+
 </resources>

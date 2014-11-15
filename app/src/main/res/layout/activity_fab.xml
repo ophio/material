@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +32,35 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <com.ophio.androidl.widget.AnimatedAddButtonButton
+            android:layout_gravity="center"
+            android:id="@+id/add_schedule_button"
+            style="@style/add_button_style">
+        </com.ophio.androidl.widget.AnimatedAddButtonButton>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <TextView
+                android:id="@+id/shadow_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shadow_seek_bar"
+                android:max="200"
+
+                />
+            </LinearLayout>
+
+
+
+    </FrameLayout>
 
     <!-- Nav drawer -->
     <include layout="@layout/navdrawer" />
