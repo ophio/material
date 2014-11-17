@@ -50,7 +50,7 @@ public class AnimatedAddButtonButton extends AbstractAnimatedPreviewButton {
         mStarred = starred;
         setChecked(mStarred, allowAnimate);
         ImageView iconView = (ImageView) findViewById(R.id.add_schedule_icon);
-        LollipopUtils.getLPreviewUtils().setOrAnimatePlusCheckIcon(
+        LollipopUtils.getInstance().setOrAnimatePlusCheckIcon(
                 iconView, starred, allowAnimate);
     }
 }

@@ -23,7 +23,7 @@ public class LollipopUtils implements LPreviewBase {
     private static final int[] STATE_CHECKED = new int[]{android.R.attr.state_checked};
     private static final int[] STATE_UNCHECKED = new int[]{};
 
-    public static LollipopUtils getLPreviewUtils() {
+    public static LollipopUtils getInstance() {
         if(null == instance) {
             instance = new LollipopUtils();
         }
@@ -50,8 +50,8 @@ public class LollipopUtils implements LPreviewBase {
             }
         } else {
             final int imageResId = isCheck
-                    ? R.drawable.add_schedule_button_icon_checked
-                    : R.drawable.add_schedule_button_icon_unchecked;
+                    ? R.drawable.fab_button__icon_checked
+                    : R.drawable.fab_button__icon_unchecked;
 
             if (imageView.getTag() != null) {
                 if (imageView.getTag() instanceof Animator) {

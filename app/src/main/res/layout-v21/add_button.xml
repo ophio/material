@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"
-        android:src="@drawable/add_schedule_button_icon_unchecked"
+        android:src="@drawable/fab_button__icon_unchecked"
         android:contentDescription="@null"
         android:layout_gravity="center" />
 
