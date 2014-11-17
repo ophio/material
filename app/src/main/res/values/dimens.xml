@@ -6,4 +6,5 @@
     <dimen name="reveal_demo_image_margin">150dp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="activity_transition_max_header_elevation">4dp</dimen>
+    <dimen name="flexible_space_title_text_size">15sp</dimen>
 </resources>
