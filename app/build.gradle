@@ -12,7 +12,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.vashisthg.androidl"
+        applicationId "com.ophio.androidl"
         minSdkVersion 14
         targetSdkVersion 21
     }

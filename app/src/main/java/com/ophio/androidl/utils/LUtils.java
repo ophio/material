@@ -89,5 +89,4 @@ public class LUtils {
 
         mActivity.getWindow().setStatusBarColor(color);
     }
-
 }

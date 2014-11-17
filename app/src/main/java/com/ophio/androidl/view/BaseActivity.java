@@ -40,10 +40,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
     protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
     protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
+    protected static final int NAVDRAWER_FAB_DEMO = 3;
     protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo};
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -239,6 +240,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_MAIN_ACTIVITY);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
         mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
+        mNavDrawerItems.add(NAVDRAWER_FAB_DEMO);
 
         createNavDrawerItems();
 
@@ -322,6 +324,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                     break;
                 case NAVDRAWER_ITEM_REVEAL_DEMO:
                     intent = new Intent(this, RevealDemoActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case NAVDRAWER_FAB_DEMO:
+                    intent = new Intent(this, FabActivity.class);
                     startActivity(intent);
                     finish();
                     break;
