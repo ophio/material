@@ -26,6 +26,7 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_reveal_demo);
         imageView = (ImageView) findViewById(R.id.fab_button);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
+        overridePendingTransition(0,0);
     }
 
     @TargetApi(21)
@@ -38,12 +39,11 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
             Log.d("Reveal", String.format(" ImageView Dimens %d %d %d %d", imageView.getTop(), imageView.getLeft(), imageView.getBottom(), imageView.getRight()));
             Log.d("Reveal", String.format("cx : %d, cy : %d",cx,cy));
             // get the final radius for the clipping circle
-            int finalRadius = imageView.getWidth();
+            int finalRadius = imageView.getWidth() * 2;
             // create and start the animator for this view
             // (the start radius is zero)
             Animator anim =
-                    ViewAnimationUtils.createCircularReveal(imageView, cx, cy, 0, finalRadius);
-            anim.setDuration(3000);
+                    ViewAnimationUtils.createCircularReveal(imageView, imageView.getLeft(), imageView.getTop(), 0, finalRadius);
             anim.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -82,12 +82,11 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
             int cy = (view.getTop() + view.getBottom()) / 2;
 
             // get the initial radius for the clipping circle
-            int initialRadius = view.getWidth();
+            int initialRadius = view.getWidth() * 2;
 
             // create the animation (the final radius is zero)
             Animator anim =
-                    ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
-            anim.setDuration(3000);
+                    ViewAnimationUtils.createCircularReveal(view, imageView.getTop(), imageView.getLeft(), initialRadius, 0);
             // make the view invisible when the animation is done
             anim.addListener(new AnimatorListenerAdapter() {
                 @Override
