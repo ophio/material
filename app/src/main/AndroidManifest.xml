@@ -16,13 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ophio.androidl.view.ActivityTransitionsDemoActivity" />
-        <activity android:name="com.ophio.androidl.view.TransitionsActivity" />
-        <activity android:name="com.ophio.androidl.view.RevealDemoActivity" />
         <activity
             android:name="com.ophio.androidl.view.FabActivity"
             android:label="@string/title_activity_fab" >
         </activity>
+        <activity android:name="com.ophio.androidl.view.ActivityTransitionsDemoActivity"/>
+        <activity android:name="com.ophio.androidl.view.TransitionsActivity"/>
+        <activity android:name="com.ophio.androidl.view.RevealDemoActivity" />
     </application>
 
 </manifest>
