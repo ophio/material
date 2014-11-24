@@ -27,5 +27,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="add">Add button</string>
+    <string name="snackbar_demo">Snackbar Demo</string>
 
 </resources>

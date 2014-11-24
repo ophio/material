@@ -24,7 +24,7 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reveal_demo);
-        imageView = (ImageView) findViewById(R.id.fab_button);
+        imageView = (ImageView) findViewById(R.id.image_view);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
         overridePendingTransition(0,0);
     }
