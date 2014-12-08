@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ophio.androidl.R;
 import com.ophio.androidl.utils.LUtils;
@@ -36,15 +37,18 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_NOT_INVALID = 1;
 
-    // Durations for certain animations we use:
-    private static final int HEADER_HIDE_ANIM_DURATION = 300;
+
     protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
     protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
     protected static final int NAVDRAWER_FAB_DEMO = 3;
     protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
+    protected static final int NAVDRAWER_ITEM_SNACKBAR = 4;
+
+    // Durations for certain animations we use:
+    private static final int HEADER_HIDE_ANIM_DURATION = 300;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo};
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo, R.string.snackbar_demo};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -241,6 +245,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
         mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
         mNavDrawerItems.add(NAVDRAWER_FAB_DEMO);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_SNACKBAR);
 
         createNavDrawerItems();
 
@@ -329,6 +334,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                     break;
                 case NAVDRAWER_FAB_DEMO:
                     intent = new Intent(this, FabActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case NAVDRAWER_ITEM_SNACKBAR:
+                    intent = new Intent(this, SnackBarDemoActivity.class);
                     startActivity(intent);
                     finish();
                     break;
@@ -441,5 +451,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void setProgressBarTopWhenActionBarShown(int progressBarTopWhenActionBarShown) {
         mProgressBarTopWhenActionBarShown = progressBarTopWhenActionBarShown;
         updateSwipeRefreshProgressBarTop();
+    }
+
+    protected void showToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }
