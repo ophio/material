@@ -20,6 +20,11 @@ ext {
     //Coding
     puppyCrawlVersion = "6.5"
 
+    //testing
+    daggerTestVersion = '1.1.0'
+    hamcrestVersion = '1.1'
+    guavaVersion = '18.0'
+
     libraries = [
 
             supportDesign: "com.android.support:design:${supportDesignVersion}",
@@ -35,6 +40,16 @@ ext {
             picasso              : "com.squareup.picasso:picasso:${picassoVersion}",
             snackBar             : "com.nispok:snackbar:${snackBarVersion}",
             puppyCrawlCheckStyle   : "com.puppycrawl.tools:checkstyle:${puppyCrawlVersion}"
+
+    ]
+
+    testLibraries = [
+
+            dagger: "com.squareup.dagger:dagger:${daggerTestVersion}",
+            hamcrestIntegration: "org.hamcrest:hamcrest-integration:${hamcrestVersion}",
+            hamcrestCore: "org.hamcrest:hamcrest-core:${hamcrestVersion}",
+            hamcrestLibrary: "org.hamcrest:hamcrest-library:${hamcrestVersion}",
+            guava: "com.google.guava:guava:${guavaVersion}"
 
     ]
 

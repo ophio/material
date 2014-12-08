@@ -15,6 +15,7 @@ android {
         applicationId "com.ophio.androidl"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
     }
 
 
@@ -28,10 +29,23 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/MANIFEST.MF'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile files('libs/espresso-1.1.jar')
+    androidTestCompile files('libs/espresso-contrib-1.1.jar')
+    androidTestCompile files('libs/testrunner-1.1.jar')
+    androidTestCompile files('libs/testrunner-runtime-1.1.jar')
+    androidTestCompile rootProject.ext.testLibraries.dagger
+    androidTestCompile rootProject.ext.testLibraries.hamcrestIntegration
+    androidTestCompile rootProject.ext.testLibraries.hamcrestCore
+    androidTestCompile rootProject.ext.testLibraries.hamcrestLibrary
+    androidTestCompile rootProject.ext.testLibraries.guava
     compile rootProject.ext.libraries.supportDesign
     compile rootProject.ext.libraries.androidSupportV13
     compile rootProject.ext.libraries.appCompat
@@ -44,6 +58,6 @@ dependencies {
     compile rootProject.ext.libraries.twoWayViewLayouts
     compile rootProject.ext.libraries.picasso
     compile rootProject.ext.libraries.snackBar
-}
+    }
 
 apply from: rootProject.file('checkstyle.gradle')
