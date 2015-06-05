@@ -9,10 +9,12 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -31,24 +33,24 @@ import com.ophio.androidl.widget.ScrimInsetsScrollView;
 import java.util.ArrayList;
 
 
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String LOGTAG = BaseActivity.class.getSimpleName();
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_NOT_INVALID = 1;
 
-
+    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
     protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
     protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
     protected static final int NAVDRAWER_FAB_DEMO = 3;
-    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
     protected static final int NAVDRAWER_ITEM_SNACKBAR = 4;
+    protected static final int NAVDRAWER_ITEM_COORDINATOR_LAYOUT = 5;
 
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
     private static final long NAVDRAWER_LAUNCH_DELAY = 250;
     private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo, R.string.snackbar_demo};
+    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo, R.string.snackbar_demo, R.string.coordinator_layout_demo};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -170,7 +172,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDrawerLayout.openDrawer(Gravity.START);
+                    mDrawerLayout.openDrawer(GravityCompat.START);
                 }
             });
         }
@@ -203,7 +205,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             }
         });
 
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         // populate the nav drawer with the correct items
         populateNavDrawer();
@@ -213,7 +215,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (!PrefUtils.isWelcomeDone(this)) {
             // first run of the app starts with the nav drawer open
             PrefUtils.markWelcomeDone(this);
-            mDrawerLayout.openDrawer(Gravity.START);
+            mDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
 
@@ -227,12 +229,12 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onNavDrawerSlide(float offset) {}
 
     protected boolean isNavDrawerOpen() {
-        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(Gravity.START);
+        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
     }
 
     protected void closeNavDrawer() {
         if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(Gravity.START);
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 
@@ -246,6 +248,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
         mNavDrawerItems.add(NAVDRAWER_FAB_DEMO);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SNACKBAR);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_COORDINATOR_LAYOUT);
 
         createNavDrawerItems();
 
@@ -291,7 +294,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     private void onNavDrawerItemClicked(final int itemId) {
         if (itemId == getSelfNavDrawerItem()) {
-            mDrawerLayout.closeDrawer(Gravity.START);
+            mDrawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
 
@@ -311,7 +314,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
             }
 
-        mDrawerLayout.closeDrawer(Gravity.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     private void goToNavDrawerItem(int itemId) {
@@ -339,6 +342,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                     break;
                 case NAVDRAWER_ITEM_SNACKBAR:
                     intent = new Intent(this, SnackBarDemoActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case NAVDRAWER_ITEM_COORDINATOR_LAYOUT:
+                    intent = new Intent(this, CoordinatorLayoutActivity.class);
                     startActivity(intent);
                     finish();
                     break;
