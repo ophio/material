@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;

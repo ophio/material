@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 /**
- * Created by gvv-fueled on 01/08/14.
+ * Created by vashisthg on 01/08/14.
  */
 public abstract class AbstractAnimatedPreviewButton extends FABFrameLayout {
 

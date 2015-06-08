@@ -2,7 +2,7 @@ package com.ophio.androidl.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -71,7 +71,7 @@ public class DemoFragment extends Fragment implements  android.support.v7.view.A
                 if (actionMode != null) {
                     return true;
                 }
-                actionMode = ((ActionBarActivity)getActivity()).startSupportActionMode(DemoFragment.this);
+                actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(DemoFragment.this);
                 return true;
             }
         });

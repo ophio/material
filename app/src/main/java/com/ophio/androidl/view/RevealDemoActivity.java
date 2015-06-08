@@ -11,10 +11,8 @@ import android.widget.ImageView;
 
 import com.ophio.androidl.R;
 
-import java.lang.Override;
-
 /**
- * Created by gaj-fueled on 04/11/14.
+ * Created by ragdroid on 04/11/14.
  */
 public class RevealDemoActivity extends BaseActivity implements View.OnClickListener {
 
@@ -26,18 +24,18 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_reveal_demo);
         imageView = (ImageView) findViewById(R.id.image_view);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     @TargetApi(21)
-    private void showFabCircularRevealView(final ImageView imageView){
-        if(mLUtils.hasL()) {
+    private void showFabCircularRevealView(final ImageView imageView) {
+        if (mLUtils.hasL()) {
             // get the center for the clipping circle
             int cx = (imageView.getLeft() + imageView.getRight()) / 2;
             int cy = (imageView.getTop() + imageView.getBottom()) / 2;
 
             Log.d("Reveal", String.format(" ImageView Dimens %d %d %d %d", imageView.getTop(), imageView.getLeft(), imageView.getBottom(), imageView.getRight()));
-            Log.d("Reveal", String.format("cx : %d, cy : %d",cx,cy));
+            Log.d("Reveal", String.format("cx : %d, cy : %d", cx, cy));
             // get the final radius for the clipping circle
             int finalRadius = imageView.getWidth() * 2;
             // create and start the animator for this view
@@ -51,8 +49,6 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
                     imageView.setVisibility(View.VISIBLE);
                 }
             });
-//            ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(imageView, View.ALPHA, 0, 1);
-//            AnimatorSet
             anim.start();
         }
     }
@@ -63,24 +59,23 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.show_hide_button:
-                if(imageView.getVisibility() == View.INVISIBLE)
+                if (imageView.getVisibility() == View.INVISIBLE) {
                     showFabCircularRevealView(imageView);
-                else
+                } else {
                     hideFabCircularRevealView(imageView);
+                }
+                break;
+            default:
                 break;
         }
     }
 
     @TargetApi(21)
     private void hideFabCircularRevealView(final View view) {
-        if(mLUtils.hasL()) {
-            // get the center for the clipping circle
-            int cx = (view.getLeft() + view.getRight()) / 2;
-            int cy = (view.getTop() + view.getBottom()) / 2;
-
+        if (mLUtils.hasL()) {
             // get the initial radius for the clipping circle
             int initialRadius = view.getWidth() * 2;
 

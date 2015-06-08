@@ -7,7 +7,7 @@ import com.ophio.androidl.R;
 
 
 /**
- * @author gaj-fueled (garima@fueled.co)
+ * @author ragdroid (garima.my.way@gmail.com)
  */
 public class CoordinatorLayoutActivity extends BaseActivity {
 
@@ -19,7 +19,7 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(getString(R.string.coordinator_layout_demo));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     @Override

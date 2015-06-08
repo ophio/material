@@ -24,7 +24,9 @@ public class PalleteTransformation implements Transformation {
         return CACHE.get(bitmap);
     }
 
-    private PalleteTransformation() {}
+    private PalleteTransformation() {
+
+    }
 
     @Override public Bitmap transform(Bitmap source) {
         Palette palette = Palette.generate(source);

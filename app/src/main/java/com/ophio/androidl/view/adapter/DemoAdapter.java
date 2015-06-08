@@ -44,7 +44,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.ViewHolder> {
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public DemoAdapter(List<DemoEntity> demoList) {
-        if(demoList == null) {
+        if (demoList == null) {
             demoList = new ArrayList<DemoEntity>();
         }
         this.demoList = demoList;

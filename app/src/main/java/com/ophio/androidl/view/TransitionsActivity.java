@@ -21,7 +21,7 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transitions);
         setUpView();
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     @TargetApi(21)
@@ -32,7 +32,7 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
         TextView textView2 = (TextView) findViewById(R.id.text_view_2);
         imageView1.setOnClickListener(this);
         imageView2.setOnClickListener(this);
-        if(mLUtils.hasL()){
+        if (mLUtils.hasL()) {
             textView1.setTransitionName(getString(R.string.textViewTransitionName));
             textView2.setTransitionName(getString(R.string.textViewTransitionName));
             imageView1.setTransitionName(getString(R.string.transition_main_activity));
@@ -47,14 +47,15 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.activity_transitions_image_view1:
                 startActivityWithTransition(view, getString(R.string.transition_main_activity), 1);
                 break;
             case R.id.activity_transitions_image_view2:
                 startActivityWithTransition(view, getString(R.string.transition_main_activity), 2);
                 break;
-
+            default:
+                break;
         }
     }
 
@@ -67,7 +68,7 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
     }
 
     private ActivityOptionsCompat getOptions(View view, String transitionName, int imageViewId) {
-        switch(imageViewId){
+        switch (imageViewId) {
             case 1:
                 return ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                         view,   // The view which starts the transition
@@ -78,7 +79,8 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
                 ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                         Pair.create(view, transitionName),
                         Pair.create(findViewById(R.id.text_view_2), getString(R.string.textViewTransitionName)));
+            default:
+                throw new RuntimeException("Wrong image view id");
         }
-        return null;
     }
 }

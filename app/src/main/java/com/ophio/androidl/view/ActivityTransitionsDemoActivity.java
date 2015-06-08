@@ -22,7 +22,7 @@ import com.ophio.androidl.widget.ObservableScrollView;
 
 
 /**
- * Created by gaj-fueled on 03/11/14.
+ * Created by ragdroid on 03/11/14.
  */
 public class ActivityTransitionsDemoActivity extends BaseActivity implements ObservableScrollView.Callbacks {
     private static final String TAG = ActivityTransitionsDemoActivity.class.getSimpleName();
@@ -51,7 +51,7 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
     @TargetApi(21)
     private void setUpDetailsView() {
         detailsContainer = findViewById(R.id.details_container);
-        if(mLUtils.hasL()) {
+        if (mLUtils.hasL()) {
             getWindow().getEnterTransition().addListener(new Transition.TransitionListener() {
                 @Override
                 public void onTransitionStart(Transition transition) {
@@ -116,14 +116,15 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_share:
                 startActivity(Intent.createChooser(
                         createShareIntent(),
                         getString(R.string.title_share)));
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
 
@@ -137,8 +138,8 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
 
     private void initView() {
         Intent intent = getIntent();
-        if(intent != null && intent.getIntExtra(ApplicationFacade.ACTIVITY_TRANSITIONS_IMAGE_ID , 0) > 0 ){
-            int imageViewId = intent.getIntExtra(ApplicationFacade.ACTIVITY_TRANSITIONS_IMAGE_ID , 0);
+        if (intent != null && intent.getIntExtra(ApplicationFacade.ACTIVITY_TRANSITIONS_IMAGE_ID, 0) > 0) {
+            int imageViewId = intent.getIntExtra(ApplicationFacade.ACTIVITY_TRANSITIONS_IMAGE_ID, 0);
             setContent(imageViewId);
         }
         ViewTreeObserver vto = scrollView.getViewTreeObserver();
@@ -152,11 +153,11 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
     private void setContent(int imageViewId) {
         TextView textView = (TextView) findViewById(R.id.textView);
         ImageView imageView = (ImageView) findViewById(R.id.activity_transitions_image_view);
-        if(mLUtils.hasL()){
+        if (mLUtils.hasL()) {
             textView.setTransitionName(getString(R.string.textViewTransitionName));
             imageView.setTransitionName(getString(R.string.transition_main_activity));
         }
-        switch(imageViewId){
+        switch (imageViewId) {
             case 1:
                 textView.setText(getString(R.string.imageViewTitle1));
                 imageView.setImageResource(R.drawable.image1);
@@ -165,7 +166,8 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
                 textView.setText(getString(R.string.imageViewTitle2));
                 imageView.setImageResource(R.drawable.image2);
                 break;
-
+            default:
+                break;
         }
     }
 
@@ -215,7 +217,7 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
     @Override
     public void onScrollChanged(int deltaX, int deltaY) {
         int scrollY = scrollView.getScrollY();
-        Log.d(LOG, "Scrolly : "+ scrollY);
+        Log.d(LOG, "Scrolly : " + scrollY);
         float newTop = Math.max(photoHeightPixels, scrollY);
         headerBar.setTranslationY(newTop);
 

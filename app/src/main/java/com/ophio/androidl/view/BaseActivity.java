@@ -13,11 +13,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -226,7 +224,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void onNavDrawerSlide(float offset) {}
+    protected void onNavDrawerSlide(float offset) {
+
+    }
 
     protected boolean isNavDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
@@ -350,6 +350,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     break;
+                default: throw new RuntimeException("no such NavDrawer Item Defined");
             }
     }
 
@@ -359,12 +360,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         TextView titleView = (TextView) view.findViewById(R.id.title);
 
         // configure its appearance according to whether or not it's selected
-        titleView.setTextColor(selected ?
-                getResources().getColor(R.color.navdrawer_text_color_selected) :
-                getResources().getColor(R.color.navdrawer_text_color));
-        iconView.setColorFilter(selected ?
-                getResources().getColor(R.color.navdrawer_icon_tint_selected) :
-                getResources().getColor(R.color.navdrawer_icon_tint));
+        titleView.setTextColor(selected
+                ? getResources().getColor(R.color.navdrawer_text_color_selected)
+                : getResources().getColor(R.color.navdrawer_text_color));
+        iconView.setColorFilter(selected
+                ? getResources().getColor(R.color.navdrawer_icon_tint_selected)
+                : getResources().getColor(R.color.navdrawer_icon_tint));
     }
     protected void autoShowOrHideActionBar(boolean show) {
         if (show == mActionBarShown) {
@@ -461,7 +462,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         updateSwipeRefreshProgressBarTop();
     }
 
-    protected void showToast(String text){
+    protected void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }
