@@ -22,8 +22,4 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         overridePendingTransition(0, 0);
     }
 
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_COORDINATOR_LAYOUT;
-    }
 }

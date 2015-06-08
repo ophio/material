@@ -34,12 +34,6 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_SNACKBAR;
-    }
-
-
     private void initSnackBar() {
         snackBar = getRandomSnackBar();
     }

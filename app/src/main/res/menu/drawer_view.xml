@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main_activity"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/main_activity" />
+        <item
+            android:id="@+id/nav_activity_transitions"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/activity_transitions" />
+        <item
+            android:id="@+id/nav_activity_reveal_demo"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/reveal_demo" />
+        <item
+            android:id="@+id/nav_activity_fab_demo"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/fab_demo" />
+        <item
+            android:id="@+id/nav_activity_snackbar_demo"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/snackbar_demo" />
+        <item
+            android:id="@+id/nav_activity_coordinator_demo"
+            android:icon="@drawable/ic_launcher"
+            android:title="@string/coordinator_layout_demo" />
+    </group>
+
+</menu>

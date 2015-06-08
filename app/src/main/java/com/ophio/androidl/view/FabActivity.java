@@ -45,10 +45,4 @@ public class FabActivity extends BaseActivity {
         });
     }
 
-
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_FAB_DEMO;
-    }
-
 }

@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -34,21 +36,10 @@ import java.util.ArrayList;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String LOGTAG = BaseActivity.class.getSimpleName();
-    protected static final int NAVDRAWER_ITEM_INVALID = -1;
-    protected static final int NAVDRAWER_ITEM_NOT_INVALID = 1;
 
-    protected static final int NAVDRAWER_ITEM_MAIN_ACTIVITY = 0;
-    protected static final int NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS = 1;
-    protected static final int NAVDRAWER_ITEM_REVEAL_DEMO = 2;
-    protected static final int NAVDRAWER_FAB_DEMO = 3;
-    protected static final int NAVDRAWER_ITEM_SNACKBAR = 4;
-    protected static final int NAVDRAWER_ITEM_COORDINATOR_LAYOUT = 5;
 
     // Durations for certain animations we use:
     private static final int HEADER_HIDE_ANIM_DURATION = 300;
-    private static final long NAVDRAWER_LAUNCH_DELAY = 250;
-    private static final long MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int[] NAV_DRAWER_TITLES = {R.string.main_activity, R.string.activity_transitions, R.string.reveal_demo, R.string.fab_demo, R.string.snackbar_demo, R.string.coordinator_layout_demo};
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -56,14 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     // Helper methods for L APIs
     protected LUtils mLUtils;
 
-    // A Runnable that we should execute when the navigation drawer finishes its closing animation
-    private Runnable mDeferredOnDrawerClosedRunnable;
-
-    // variables that control the Action Bar auto hide behavior (aka "quick recall")
-    private boolean mActionBarAutoHideEnabled = false;
-    private int mActionBarAutoHideSensivity = 0;
-    private int mActionBarAutoHideMinY = 0;
-    private int mActionBarAutoHideSignal = 0;
     private boolean mActionBarShown = true;
 
     private int mProgressBarTopWhenActionBarShown;
@@ -82,11 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final TypeEvaluator ARGB_EVALUATOR = new ArgbEvaluator();
 
-    // SwipeRefreshLayout allows the user to swipe the screen down to trigger a manual refresh
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private ViewGroup mDrawerItemsListContainer;
-    private View[] mNavDrawerItemViews;
-    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,12 +81,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         getActionBarToolbar();
+        setupNavDrawer();
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        setupNavDrawer();
     }
 
     protected Toolbar getActionBarToolbar() {
@@ -122,22 +101,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     /**
-     * Returns the navigation drawer item that corresponds to this Activity. Subclasses
-     * of BaseActivity override this to indicate what nav drawer item corresponds to them
-     * Return NAVDRAWER_ITEM_INVALID to mean that this Activity should not have a Nav Drawer.
-     */
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_INVALID;
-    }
-
-    /**
      * Sets up the navigation drawer as appropriate. Note that the nav drawer will be
      * different depending on whether the attendee indicated that they are attending the
      * event on-site vs. attending remotely.
      */
     private void setupNavDrawer() {
-        // What nav drawer item should be selected?
-        int selfItem = getSelfNavDrawerItem();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (mDrawerLayout == null) {
@@ -145,24 +113,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mDrawerLayout.setStatusBarBackgroundColor(
                 getResources().getColor(R.color.theme_primary_dark));
-        ScrimInsetsScrollView navDrawer = (ScrimInsetsScrollView)
+        NavigationView navDrawer = (NavigationView)
                 mDrawerLayout.findViewById(R.id.navdrawer);
-        if (selfItem == NAVDRAWER_ITEM_INVALID) {
-            // do not show a nav drawer
-            if (navDrawer != null) {
-                ((ViewGroup) navDrawer.getParent()).removeView(navDrawer);
-            }
-            mDrawerLayout = null;
-            return;
-        }
-
         if (navDrawer != null) {
-            navDrawer.setOnInsetsCallback(new ScrimInsetsScrollView.OnInsetsCallback() {
-                @Override
-                public void onInsetsChanged(Rect insets) {
-                    Log.d(LOGTAG, "insets changed");
-                }
-            });
+            setupDrawerContent(navDrawer);
         }
 
         if (mActionBarToolbar != null) {
@@ -175,39 +129,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             });
         }
 
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // run deferred action, if we have one
-                if (mDeferredOnDrawerClosedRunnable != null) {
-                    mDeferredOnDrawerClosedRunnable.run();
-                    mDeferredOnDrawerClosedRunnable = null;
-                }
-
-                onNavDrawerStateChanged(false, false);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                onNavDrawerStateChanged(true, false);
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-                onNavDrawerStateChanged(isNavDrawerOpen(), newState != DrawerLayout.STATE_IDLE);
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                onNavDrawerSlide(slideOffset);
-            }
-        });
-
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-        // populate the nav drawer with the correct items
-        populateNavDrawer();
-
         // When the user runs the app for the first time, we want to land them with the
         // navigation drawer open. But just the first time.
         if (!PrefUtils.isWelcomeDone(this)) {
@@ -217,135 +138,49 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    // Subclasses can override this for custom behavior
-    protected void onNavDrawerStateChanged(boolean isOpen, boolean isAnimating) {
-        if (mActionBarAutoHideEnabled && isOpen) {
-            autoShowOrHideActionBar(true);
-        }
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        goToNavDrawerItem(menuItem.getItemId());
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
     }
 
-    protected void onNavDrawerSlide(float offset) {
-
-    }
-
-    protected boolean isNavDrawerOpen() {
-        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
-    }
-
-    protected void closeNavDrawer() {
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        }
-    }
-
-    /** Populates the navigation drawer with the appropriate items. */
-    private void populateNavDrawer() {
-
-        mNavDrawerItems.clear();
-
-        mNavDrawerItems.add(NAVDRAWER_ITEM_MAIN_ACTIVITY);
-        mNavDrawerItems.add(NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS);
-        mNavDrawerItems.add(NAVDRAWER_ITEM_REVEAL_DEMO);
-        mNavDrawerItems.add(NAVDRAWER_FAB_DEMO);
-        mNavDrawerItems.add(NAVDRAWER_ITEM_SNACKBAR);
-        mNavDrawerItems.add(NAVDRAWER_ITEM_COORDINATOR_LAYOUT);
-
-        createNavDrawerItems();
-
-    }
-    private void createNavDrawerItems() {
-        mDrawerItemsListContainer = (ViewGroup) findViewById(R.id.navdrawer_items_list);
-        if (mDrawerItemsListContainer == null) {
-            return;
-        }
-
-        mNavDrawerItemViews = new View[mNavDrawerItems.size()];
-        mDrawerItemsListContainer.removeAllViews();
-        int i = 0;
-        for (int itemId : mNavDrawerItems) {
-            mNavDrawerItemViews[i] = makeNavDrawerItem(itemId, mDrawerItemsListContainer);
-            mDrawerItemsListContainer.addView(mNavDrawerItemViews[i]);
-            ++i;
-        }
-    }
-
-    private View makeNavDrawerItem(final int itemId, ViewGroup container) {
-        boolean selected = getSelfNavDrawerItem() == itemId;
-        int layoutToInflate = R.layout.navdrawer_item;
-        View view = getLayoutInflater().inflate(layoutToInflate, container, false);
-
-        ImageView iconView = (ImageView) view.findViewById(R.id.icon);
-        TextView titleView = (TextView) view.findViewById(R.id.title);
-        int iconId = R.drawable.ic_launcher;
-        int titleId = R.string.activity_transitions_title;
-        iconView.setVisibility(View.VISIBLE);
-        iconView.setImageResource(iconId);
-        titleView.setText(NAV_DRAWER_TITLES[itemId]);
-        formatNavDrawerItem(view, itemId, selected);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNavDrawerItemClicked(itemId);
-            }
-        });
-        return view;
-    }
-
-
-    private void onNavDrawerItemClicked(final int itemId) {
-        if (itemId == getSelfNavDrawerItem()) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-            return;
-        }
-
-            // launch the target Activity after a short delay, to allow the close animation to play
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    goToNavDrawerItem(itemId);
-                }
-            }, NAVDRAWER_LAUNCH_DELAY);
-
-            // change the active item on the list so the user can see the item changed
-            setSelectedNavDrawerItem(itemId);
-            // fade out the main content
-            View mainContent = findViewById(R.id.main_content);
-            if (mainContent != null) {
-                mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
-            }
-
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-    }
 
     private void goToNavDrawerItem(int itemId) {
             Intent intent;
             switch (itemId) {
-                case NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS:
+                case R.id.nav_activity_transitions:
                     intent = new Intent(this, TransitionsActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-                case NAVDRAWER_ITEM_MAIN_ACTIVITY:
+                case R.id.nav_main_activity:
                     intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-                case NAVDRAWER_ITEM_REVEAL_DEMO:
+                case R.id.nav_activity_reveal_demo:
                     intent = new Intent(this, RevealDemoActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-                case NAVDRAWER_FAB_DEMO:
+                case R.id.nav_activity_fab_demo:
                     intent = new Intent(this, FabActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-                case NAVDRAWER_ITEM_SNACKBAR:
+                case R.id.nav_activity_snackbar_demo:
                     intent = new Intent(this, SnackBarDemoActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-                case NAVDRAWER_ITEM_COORDINATOR_LAYOUT:
+                case R.id.nav_activity_coordinator_demo:
                     intent = new Intent(this, CoordinatorLayoutActivity.class);
                     startActivity(intent);
                     finish();
@@ -367,6 +202,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 ? getResources().getColor(R.color.navdrawer_icon_tint_selected)
                 : getResources().getColor(R.color.navdrawer_icon_tint));
     }
+
     protected void autoShowOrHideActionBar(boolean show) {
         if (show == mActionBarShown) {
             return;
@@ -375,21 +211,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mActionBarShown = show;
         onActionBarAutoShowOrHide(show);
     }
-    /**
-     * Sets up the given navdrawer item's appearance to the selected state. Note: this could
-     * also be accomplished (perhaps more cleanly) with state-based layouts.
-     */
-    private void setSelectedNavDrawerItem(int itemId) {
-        if (mNavDrawerItemViews != null) {
-            for (int i = 0; i < mNavDrawerItemViews.length; i++) {
-                if (i < mNavDrawerItems.size()) {
-                    int thisItemId = mNavDrawerItems.get(i);
-                    formatNavDrawerItem(mNavDrawerItemViews[i], thisItemId, itemId == thisItemId);
-                }
-            }
-        }
-    }
-
 
     protected void onActionBarAutoShowOrHide(boolean shown) {
         if (mStatusBarColorAnimator != null) {

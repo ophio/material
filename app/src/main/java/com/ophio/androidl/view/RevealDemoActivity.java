@@ -54,11 +54,6 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_REVEAL_DEMO;
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.show_hide_button:

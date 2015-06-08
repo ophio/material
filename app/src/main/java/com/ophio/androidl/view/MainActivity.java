@@ -14,9 +14,4 @@ public class MainActivity extends BaseActivity {
         overridePendingTransition(0, 0);
     }
 
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_MAIN_ACTIVITY;
-    }
-
 }

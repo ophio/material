@@ -41,11 +41,6 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS;
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_transitions_image_view1:
