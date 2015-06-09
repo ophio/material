@@ -24,7 +24,7 @@ public class LollipopUtils implements LPreviewBase {
     private static final int[] STATE_UNCHECKED = new int[]{};
 
     public static LollipopUtils getInstance() {
-        if(null == instance) {
+        if (null == instance) {
             instance = new LollipopUtils();
         }
         return instance;
@@ -36,7 +36,7 @@ public class LollipopUtils implements LPreviewBase {
     public void setOrAnimatePlusCheckIcon(final ImageView imageView, boolean isCheck,
                                                  boolean allowAnimate) {
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AnimatedStateListDrawable drawable = (AnimatedStateListDrawable)
                     imageView.getResources().getDrawable(R.drawable.fab_icon_anim);
             imageView.setImageDrawable(drawable);

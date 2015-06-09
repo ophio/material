@@ -28,6 +28,9 @@ import static com.ophio.androidl.utils.LogUtils.makeLogTag;
 public class PrefUtils  {
     private static final String TAG = makeLogTag("PrefUtils");
 
+    private PrefUtils() {
+        //utility class
+    }
     /**
      * Boolean indicating whether we performed the (one-time) welcome flow.
      */

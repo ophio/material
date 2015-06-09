@@ -7,7 +7,7 @@ import android.widget.ScrollView;
 import java.util.ArrayList;
 
 /**
- * Created by gaj-fueled on 06/11/14.
+ * Created by vashisthg on 06/11/14.
  */
 public class ObservableScrollView extends ScrollView {
     private ArrayList<Callbacks> mCallbacks = new ArrayList<Callbacks>();
@@ -35,7 +35,7 @@ public class ObservableScrollView extends ScrollView {
         }
     }
 
-    public static interface Callbacks {
-        public void onScrollChanged(int deltaX, int deltaY);
+    public interface Callbacks {
+        void onScrollChanged(int deltaX, int deltaY);
     }
 }

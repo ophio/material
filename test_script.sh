@@ -1,2 +1,1 @@
-./gradlew clean
-./gradlew assembleDebug
+./gradlew clean check test

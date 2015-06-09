@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -16,13 +15,13 @@ import com.ophio.androidl.R;
 import java.util.Random;
 
 /**
- * Created by gaj-fueled on 24/11/14.
+ * Created by ragdroid on 24/11/14.
  */
 public class SnackBarDemoActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView imageView;
     private Snackbar snackBar;
-    private String LOGTAG = SnackBarDemoActivity.class.getSimpleName();
+    private static final String LOGTAG = SnackBarDemoActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
         imageView = (ImageView) findViewById(R.id.image_view);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
         initSnackBar();
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
 
@@ -46,13 +45,15 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
     }
 
     private Snackbar getRandomSnackBar() {
-        switch (new Random().nextInt(6)){
+        switch (new Random().nextInt(6)) {
             case 0: return getSingleLineSnackBar();
             case 1: return getSnackBarWithAction();
             case 2: return getSnackBarWithListener();
             case 3: return getMultilineSnackBar();
             case 4: return getUnAnimatedSnackbar();
             case 5: return getColorfulSnackbar();
+            default:
+                break;
         }
         return getSingleLineSnackBar();
     }
@@ -62,7 +63,7 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
                 .text("Single-line snackbar");
     }
 
-    private Snackbar getSnackBarWithAction(){
+    private Snackbar getSnackBarWithAction() {
         return Snackbar.with(getApplicationContext()) // context
                 .text("Item deleted") // text to display
                 .actionLabel("Undo") // action button label
@@ -74,7 +75,7 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
                 }); // action button's ActionClickListener
     }
 
-    private Snackbar getSnackBarWithListener(){
+    private Snackbar getSnackBarWithListener() {
         return Snackbar.with(getApplicationContext()) // context
                 .text("This will do something when dismissed") // text to display
                 .eventListener(new EventListener() {
@@ -89,11 +90,11 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
                 }); // Snackbar's DismissListener
     }
 
-    private Snackbar getMultilineSnackBar(){
+    private Snackbar getMultilineSnackBar() {
         return Snackbar.with(getApplicationContext()) // context
                 .type(SnackbarType.MULTI_LINE) // Set is as a multi-line snackbar
-                .text("This is a multi-line snackbar. Keep in mind that snackbars are " +
-                        "meant for VERY short messages") // text to be displayed
+                .text("This is a multi-line snackbar. Keep in mind that snackbars are "
+                        + "meant for VERY short messages") // text to be displayed
                 .duration(Snackbar.SnackbarDuration.LENGTH_SHORT); // make it shorter
     }
 
@@ -103,7 +104,7 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
                 .animation(false);
     }
 
-    private Snackbar getColorfulSnackbar(){
+    private Snackbar getColorfulSnackbar() {
         return Snackbar.with(getApplicationContext()) // context
                 .text("Different colors this time") // text to be displayed
                 .textColor(Color.GREEN) // change the text color
@@ -120,16 +121,17 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.show_hide_button:
-                if(snackBar != null && snackBar.isShowing()) {
+                if (snackBar != null && snackBar.isShowing()) {
                     snackBar.dismiss();
-                }
-                else {
+                } else {
                     snackBar = null;
                     initSnackBar();
                     snackBar.show(this);
                 }
+                break;
+            default:
                 break;
         }
     }
