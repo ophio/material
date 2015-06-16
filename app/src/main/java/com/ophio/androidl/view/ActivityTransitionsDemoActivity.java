@@ -48,6 +48,11 @@ public class ActivityTransitionsDemoActivity extends BaseActivity implements Obs
         initView();
     }
 
+    @Override
+    protected int getSelfNavdrawerMenuItemId() {
+        return -1;
+    }
+
     @TargetApi(21)
     private void setUpDetailsView() {
         detailsContainer = findViewById(R.id.details_container);

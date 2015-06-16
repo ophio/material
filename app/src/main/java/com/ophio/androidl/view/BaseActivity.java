@@ -1,45 +1,26 @@
 package com.ophio.androidl.view;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ophio.androidl.R;
 import com.ophio.androidl.utils.LUtils;
 import com.ophio.androidl.utils.PrefUtils;
-import com.ophio.androidl.widget.ScrimInsetsScrollView;
-
-import java.util.ArrayList;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String LOGTAG = BaseActivity.class.getSimpleName();
+    private static final long MAIN_CONTENT_FADEOUT_DURATION = 400;
 
-
-    // Durations for certain animations we use:
-    private static final int HEADER_HIDE_ANIM_DURATION = 300;
 
     protected Toolbar mActionBarToolbar;
     protected DrawerLayout mDrawerLayout;
@@ -47,34 +28,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     // Helper methods for L APIs
     protected LUtils mLUtils;
 
-    private boolean mActionBarShown = true;
-
-    private int mProgressBarTopWhenActionBarShown;
-
-    private int mThemedStatusBarColor;
-    private int mNormalStatusBarColor;
-
-    private ObjectAnimator mStatusBarColorAnimator;
-
-    // When set, these components will be shown/hidden in sync with the action bar
-    // to implement the "quick recall" effect (the Action Bar and the header views disappear
-    // when you scroll down a list, and reappear quickly when you scroll up).
-    private ArrayList<View> mHideableHeaderViews = new ArrayList<View>();
-
-    private ArrayList<Integer> mNavDrawerItems = new ArrayList<Integer>();
-
-    private static final TypeEvaluator ARGB_EVALUATOR = new ArgbEvaluator();
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mLUtils = LUtils.getInstance(this);
-        mThemedStatusBarColor = getResources().getColor(R.color.theme_primary_dark);
-        mNormalStatusBarColor = mThemedStatusBarColor;
-
     }
 
     @Override
@@ -82,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.setContentView(layoutResID);
         getActionBarToolbar();
         setupNavDrawer();
+        overridePendingTransition(android.R.anim.fade_in, 0);
     }
 
     @Override
@@ -138,149 +98,105 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    private void setupDrawerContent(final NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        goToNavDrawerItem(menuItem.getItemId());
+                    public boolean onNavigationItemSelected(final MenuItem menuItem) {
+                        if (getSelfNavdrawerMenuItemId() == menuItem.getItemId()) {
+                            mDrawerLayout.closeDrawers();
+                            return true;
+                        }
+                        setItemChecked(navigationView, false);
+                        animateMainContent();
+                        setDrawerListener(menuItem);
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });
+        setItemChecked(navigationView, true);
     }
+
+    private void setItemChecked(NavigationView navigationView, boolean b) {
+        navigationView.getMenu().findItem(getSelfNavdrawerMenuItemId()).setChecked(b);
+    }
+
+    private void animateMainContent() {
+        View mainContent = findViewById(R.id.main_content);
+        if (mainContent != null) {
+            mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
+        }
+    }
+
+    private void setDrawerListener(final MenuItem menuItem) {
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                if (newState == DrawerLayout.STATE_IDLE) {
+                    if (menuItem != null && mDrawerLayout != null) {
+                        menuItem.setChecked(true);
+                        goToNavDrawerItem(menuItem.getItemId());
+                        mDrawerLayout.setDrawerListener(null);
+                    }
+                }
+
+            }
+        });
+    }
+
+    protected abstract int getSelfNavdrawerMenuItemId();
 
 
     private void goToNavDrawerItem(int itemId) {
-            Intent intent;
-            switch (itemId) {
-                case R.id.nav_activity_transitions:
-                    intent = new Intent(this, TransitionsActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case R.id.nav_main_activity:
-                    intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case R.id.nav_activity_reveal_demo:
-                    intent = new Intent(this, RevealDemoActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case R.id.nav_activity_fab_demo:
-                    intent = new Intent(this, FabActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case R.id.nav_activity_snackbar_demo:
-                    intent = new Intent(this, SnackBarDemoActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case R.id.nav_activity_coordinator_demo:
-                    intent = new Intent(this, CoordinatorLayoutActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                default: throw new RuntimeException("no such NavDrawer Item Defined");
-            }
-    }
-
-    private void formatNavDrawerItem(View view, int itemId, boolean selected) {
-
-        ImageView iconView = (ImageView) view.findViewById(R.id.icon);
-        TextView titleView = (TextView) view.findViewById(R.id.title);
-
-        // configure its appearance according to whether or not it's selected
-        titleView.setTextColor(selected
-                ? getResources().getColor(R.color.navdrawer_text_color_selected)
-                : getResources().getColor(R.color.navdrawer_text_color));
-        iconView.setColorFilter(selected
-                ? getResources().getColor(R.color.navdrawer_icon_tint_selected)
-                : getResources().getColor(R.color.navdrawer_icon_tint));
-    }
-
-    protected void autoShowOrHideActionBar(boolean show) {
-        if (show == mActionBarShown) {
-            return;
+        Intent intent;
+        switch (itemId) {
+            case R.id.nav_activity_transitions:
+                intent = new Intent(this, TransitionsActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_main_activity:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_activity_reveal_demo:
+                intent = new Intent(this, RevealDemoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_activity_fab_demo:
+                intent = new Intent(this, FabActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_activity_snackbar_demo:
+                intent = new Intent(this, SnackBarDemoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_activity_coordinator_demo:
+                intent = new Intent(this, CoordinatorLayoutActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default: throw new RuntimeException("no such NavDrawer Item Defined");
         }
-
-        mActionBarShown = show;
-        onActionBarAutoShowOrHide(show);
-    }
-
-    protected void onActionBarAutoShowOrHide(boolean shown) {
-        if (mStatusBarColorAnimator != null) {
-            mStatusBarColorAnimator.cancel();
-        }
-        mStatusBarColorAnimator = ObjectAnimator.ofInt(
-                (mDrawerLayout != null) ? mDrawerLayout : mLUtils,
-                (mDrawerLayout != null) ? "statusBarBackgroundColor" : "statusBarColor",
-                shown ? Color.BLACK : mNormalStatusBarColor,
-                shown ? mNormalStatusBarColor : Color.BLACK)
-                .setDuration(250);
-        if (mDrawerLayout != null) {
-            mStatusBarColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ViewCompat.postInvalidateOnAnimation(mDrawerLayout);
-                }
-            });
-        }
-        mStatusBarColorAnimator.setEvaluator(ARGB_EVALUATOR);
-        mStatusBarColorAnimator.start();
-
-        updateSwipeRefreshProgressBarTop();
-
-        for (View view : mHideableHeaderViews) {
-            if (shown) {
-                view.animate()
-                        .translationY(0)
-                        .alpha(1)
-                        .setDuration(HEADER_HIDE_ANIM_DURATION)
-                        .setInterpolator(new DecelerateInterpolator());
-            } else {
-                view.animate()
-                        .translationY(-view.getBottom())
-                        .alpha(0)
-                        .setDuration(HEADER_HIDE_ANIM_DURATION)
-                        .setInterpolator(new DecelerateInterpolator());
-            }
-        }
-    }
-
-    private void updateSwipeRefreshProgressBarTop() {
-        if (mSwipeRefreshLayout == null) {
-            return;
-        }
-
-        int progressBarStartMargin = getResources().getDimensionPixelSize(
-                R.dimen.swipe_refresh_progress_bar_start_margin);
-        int progressBarEndMargin = getResources().getDimensionPixelSize(
-                R.dimen.swipe_refresh_progress_bar_end_margin);
-        int top = mActionBarShown ? mProgressBarTopWhenActionBarShown : 0;
-        mSwipeRefreshLayout.setProgressViewOffset(false,
-                top + progressBarStartMargin, top + progressBarEndMargin);
-    }
-
-    protected void registerHideableHeaderView(View hideableHeaderView) {
-        if (!mHideableHeaderViews.contains(hideableHeaderView)) {
-            mHideableHeaderViews.add(hideableHeaderView);
-        }
-    }
-
-    protected void deregisterHideableHeaderView(View hideableHeaderView) {
-        if (mHideableHeaderViews.contains(hideableHeaderView)) {
-            mHideableHeaderViews.remove(hideableHeaderView);
-        }
-    }
-
-    protected void setProgressBarTopWhenActionBarShown(int progressBarTopWhenActionBarShown) {
-        mProgressBarTopWhenActionBarShown = progressBarTopWhenActionBarShown;
-        updateSwipeRefreshProgressBarTop();
     }
 
     protected void showToast(String text) {

@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="192dp"
-              android:background="?attr/colorPrimaryDark"
-              android:padding="16dp"
+              android:layout_height="@dimen/nav_header_height"
               android:theme="@style/ThemeOverlay.AppCompat.Dark"
               android:orientation="vertical"
               android:gravity="bottom">
 
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="centerCrop"
+        android:src="@drawable/image1"/>
     <TextView
+        android:padding="@dimen/keyline_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-</LinearLayout>
+</FrameLayout>

@@ -19,7 +19,11 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(getString(R.string.coordinator_layout_demo));
-        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected int getSelfNavdrawerMenuItemId() {
+        return R.id.nav_activity_coordinator_demo;
     }
 
 }
