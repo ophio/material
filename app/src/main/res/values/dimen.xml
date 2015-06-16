@@ -8,6 +8,7 @@
 
 
     <dimen name="navdrawer_width">260dp</dimen>
+    <dimen name="nav_header_height">192dp</dimen>
     <dimen name="headerbar_elevation">4dp</dimen>
 
 

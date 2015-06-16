@@ -30,13 +30,11 @@ public class SnackBarDemoActivity extends BaseActivity implements View.OnClickLi
         imageView = (ImageView) findViewById(R.id.image_view);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
         initSnackBar();
-        overridePendingTransition(0, 0);
     }
 
-
     @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_SNACKBAR;
+    protected int getSelfNavdrawerMenuItemId() {
+        return R.id.nav_activity_snackbar_demo;
     }
 
 

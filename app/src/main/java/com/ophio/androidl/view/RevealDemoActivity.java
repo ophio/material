@@ -24,7 +24,11 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_reveal_demo);
         imageView = (ImageView) findViewById(R.id.image_view);
         findViewById(R.id.show_hide_button).setOnClickListener(this);
-        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected int getSelfNavdrawerMenuItemId() {
+        return R.id.nav_activity_reveal_demo;
     }
 
     @TargetApi(21)
@@ -51,11 +55,6 @@ public class RevealDemoActivity extends BaseActivity implements View.OnClickList
             });
             anim.start();
         }
-    }
-
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_REVEAL_DEMO;
     }
 
     @Override

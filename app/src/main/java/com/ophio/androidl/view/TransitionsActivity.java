@@ -21,7 +21,11 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transitions);
         setUpView();
-        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected int getSelfNavdrawerMenuItemId() {
+        return R.id.nav_activity_transitions;
     }
 
     @TargetApi(21)
@@ -38,11 +42,6 @@ public class TransitionsActivity extends BaseActivity implements View.OnClickLis
             imageView1.setTransitionName(getString(R.string.transition_main_activity));
             imageView2.setTransitionName(getString(R.string.transition_main_activity));
         }
-    }
-
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_ACTIVITY_TRANSITIONS;
     }
 
     @Override

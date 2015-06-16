@@ -23,7 +23,6 @@ public class FabActivity extends BaseActivity {
         setContentView(R.layout.activity_fab);
         ButterKnife.inject(this);
 
-        overridePendingTransition(0, 0);
         ViewCompat.setElevation(animatedButton, 24.0f);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -45,10 +44,9 @@ public class FabActivity extends BaseActivity {
         });
     }
 
-
     @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_FAB_DEMO;
+    protected int getSelfNavdrawerMenuItemId() {
+        return R.id.nav_activity_fab_demo;
     }
 
 }
